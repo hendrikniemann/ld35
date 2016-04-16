@@ -29,9 +29,13 @@ try {
 
 document.body.appendChild(renderer.view);
 
+let t0 = window.performance.now();
+
 function animate() {
   renderer.render(app);
+  const t1 = window.performance.now();
   app.run(1);
+  t0 = t1;
   requestAnimationFrame(animate);
 }
 

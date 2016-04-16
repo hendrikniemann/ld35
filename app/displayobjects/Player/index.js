@@ -22,6 +22,10 @@ export default class Player extends Container {
     this.addChild(state);
   }
 
+  shiftIt() {
+    this.type = this.types[(this.currentType + 1) % this.types.length];
+  }
+
   get type() {
     return this.types[this.currentType];
   }

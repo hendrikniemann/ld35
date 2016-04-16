@@ -2,14 +2,14 @@ export default class KeyHandler {
   constructor() {
     this.keyDownListeners = {};
     this.keyUpListeners = {};
-    this.onKeyDownListener = window.addEventListener('keydown', ({ key }) => {
-      if (this.keyDownListeners[key]) {
-        this.keyDownListeners[key](key);
+    this.onKeyDownListener = window.addEventListener('keydown', ({ code }) => {
+      if (this.keyDownListeners[code]) {
+        this.keyDownListeners[code](code);
       }
     });
-    this.onKeyUpListener = window.addEventListener('keyup', ({ key }) => {
-      if (this.keyUpListeners[key]) {
-        this.keyUpListeners[key](key);
+    this.onKeyUpListener = window.addEventListener('keyup', ({ code }) => {
+      if (this.keyUpListeners[code]) {
+        this.keyUpListeners[code](code);
       }
     });
   }
@@ -32,5 +32,6 @@ export default class KeyHandler {
 
   cleanup() {
     window.removeEventListener(this.onKeyDownListener);
+    window.removeEventListener(this.onKeyUpListener);
   }
 }
