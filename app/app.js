@@ -34,7 +34,7 @@ let t0 = window.performance.now();
 function animate() {
   renderer.render(app);
   const t1 = window.performance.now();
-  app.run(1);
+  app.run((t1 - t0) / (100 / 6));
   t0 = t1;
   requestAnimationFrame(animate);
 }

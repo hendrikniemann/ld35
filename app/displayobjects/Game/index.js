@@ -1,5 +1,5 @@
 import { Container } from 'pixi.js';
-import { Howler, Howl } from 'howler';
+import { Howl } from 'howler';
 import Eventify from 'eventify';
 import R from 'ramda';
 
@@ -11,12 +11,12 @@ import KeyHandler from '../../listeners/KeyHandler';
 import { TRIANGLE, SQUARE, HEXAGON, CIRCLE, STAR } from '../../constants';
 import audioUri from './audio.wav';
 import starsUri from './stars.wav';
+import levelUri from './levels.wav';
 import { isGood } from '../../util/istype';
-
-Howler.volume(0.3);
 
 const sounds = new Howl({
   urls: [audioUri],
+  volume: 0.3,
   sprite: {
     error: [0, 260],
     pickup: [268, 410],
@@ -25,6 +25,7 @@ const sounds = new Howl({
 
 const stars = new Howl({
   urls: [starsUri],
+  volume: 0.3,
   sprite: {
     1: [0, 395],
     2: [410, 395],
@@ -32,6 +33,25 @@ const stars = new Howl({
     4: [1226, 395],
     5: [1633, 395],
     6: [2042, 395],
+  },
+});
+
+const levels = new Howl({
+  urls: [levelUri],
+  volume: 0.8,
+  sprite: {
+    1: [534, 1265],
+    2: [2334, 1212],
+    3: [4110, 1741],
+    4: [6385, 1428],
+    5: [8638, 1858],
+    6: [10762, 1672],
+    7: [12817, 1474],
+    8: [14791, 1625],
+    9: [16753, 1486],
+    10: [18669, 1660],
+    11: [21525, 1846],
+    12: [23975, 1881],
   },
 });
 
@@ -65,6 +85,8 @@ export default class Game extends Container {
       R.pipe(play('pickup'), () => { starCombo = 0; })
     ));
     this.on('error', () => { starCombo = 0; });
+
+    this.level.on('levelup', level => levels.play(level));
 
     this.handler = new KeyHandler();
     this.isMovingLeft = false;

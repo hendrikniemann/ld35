@@ -34,10 +34,12 @@ export function nextType() {
   return nextChain.shift();
 }
 
-const zickzack = R.flatten(R.repeat([0.5, 0.25, 0.5, 0.75], 3));
+const zickzack = [0.5, 0.25, 0.5, 0.75];
+const leftright = [0.5, 0.5, 0.3, 0.5, 0.7, 0.5, 0.5];
 const funcs = [
-  index => zickzack[index],
-  index => Math.sin(index / 6) / 2 + 0.5,
+  index => zickzack[index % 4],
+  index => Math.sin(index / 6 * Math.PI) / 2 + 0.5,
+  index => leftright[Math.floor(index / 2)],
 ];
 
 let nextPosChain = R.repeat(0.5, 10);

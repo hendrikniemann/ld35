@@ -8,6 +8,10 @@ import { TRIANGLE, SQUARE, HEXAGON, CIRCLE, STAR, HEART } from '../../constants'
 import { nextType, nextPosition } from './chainer';
 import R from 'ramda';
 
+const levels = [
+  1000, 2500, 5000, 10000, 16000, 25000, 40000, 55000, 75000, 100000, 130000, 160000,
+];
+
 export default class Level extends Container {
   constructor(game) {
     super();
@@ -18,6 +22,7 @@ export default class Level extends Container {
     this.speed = 2;
     this.baseSpeed = 2;
     this.rota = 0;
+    this.difficulty = 0;
 
     this.pools = {
       [TRIANGLE]: new Pool(() => new Shape(TRIANGLE), 10),
@@ -28,14 +33,21 @@ export default class Level extends Container {
       [HEART]: new Pool(() => new Heart(), 10),
     };
 
-    game.on('collect', R.when(R.equals(STAR), () => { this.speed += 1; }));
+    game.on('collect', R.when(R.equals(STAR), () => {
+      this.speed = Math.min(this.baseSpeed + 2, this.speed + 0.3);
+    }));
 
     this.createNewChildren(30);
   }
 
   run(delta) {
+    if (this.difficulty < 12 && this.pos > levels[this.difficulty]) {
+      this.difficulty++;
+      this.baseSpeed += 0.5;
+      this.trigger('levelup', this.difficulty);
+    }
     if (this.speed > this.baseSpeed) {
-      this.speed -= 0.02;
+      this.speed -= 0.005;
     }
     this.rota = (this.rota + 0.01) % 2;
     const remove = [];
@@ -77,7 +89,7 @@ export default class Level extends Container {
         child.y = this.newPos;
         this.addChild(child);
       }
-      this.newPos -= 100;
+      this.newPos -= 120 + this.difficulty * 10;
     }
   }
 }
