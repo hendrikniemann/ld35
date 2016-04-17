@@ -1,5 +1,5 @@
 import { Sprite, Texture } from 'pixi.js';
-import { TRIANGLE, SQUARE, HEXAGON, CIRCLE } from '../../constants/states';
+import { TRIANGLE, SQUARE, HEXAGON, CIRCLE } from '../../constants';
 
 import circleTexture from './circle.png';
 import triangleTexture from './triangle.png';
@@ -16,6 +16,7 @@ const textures = {
 export default class Shape extends Sprite {
   constructor(type) {
     super(textures[type]);
+    this.type = type;
     this.pivot.set(20, 20);
   }
 }

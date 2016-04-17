@@ -1,5 +1,5 @@
 import { Container } from 'pixi.js';
-import { TRIANGLE, SQUARE, HEXAGON, CIRCLE } from '../../constants/states';
+import { TRIANGLE, SQUARE, HEXAGON, CIRCLE } from '../../constants';
 import State from './State';
 
 export default class Player extends Container {

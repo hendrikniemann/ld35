@@ -18,7 +18,10 @@
     "reactman": "reactman --config ./templates/reactman.config.js"
   },
   "dependencies": {
+    "eventify": "^2.0.0",
+    "howler": "^1.1.29",
     "pixi.js": "^3.0.7",
+    "ramda": "^0.21.0",
     "tween.js": "^16.3.4"
   },
   "devDependencies": {
