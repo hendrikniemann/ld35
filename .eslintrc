@@ -16,6 +16,6 @@
   },
   "plugins": ["import"],
   "settings": {
-    "import/ignore": ["node_modules", "\\.png$", "\\.wav$"]
+    "import/ignore": ["node_modules", "\\.png$", "\\.wav$", "\\.mp3$"]
   }
 }

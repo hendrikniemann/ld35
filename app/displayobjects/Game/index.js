@@ -11,7 +11,7 @@ import KeyHandler from '../../listeners/KeyHandler';
 import { TRIANGLE, SQUARE, HEXAGON, CIRCLE, STAR } from '../../constants';
 import audioUri from './audio.wav';
 import starsUri from './stars.wav';
-import levelUri from './levels.wav';
+import levelUri from './levels.mp3';
 import { isGood } from '../../util/istype';
 
 const sounds = new Howl({
